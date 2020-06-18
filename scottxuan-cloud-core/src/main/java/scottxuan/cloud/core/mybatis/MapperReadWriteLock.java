@@ -14,10 +14,12 @@ public class MapperReadWriteLock implements ReadWriteLock {
     MapperReadWriteLock() {
     }
 
+    @Override
     public Lock readLock() {
         return this.lock;
     }
 
+    @Override
     public Lock writeLock() {
         return this.lock;
     }
@@ -26,23 +28,29 @@ public class MapperReadWriteLock implements ReadWriteLock {
         DummyLock() {
         }
 
+        @Override
         public void lock() {
         }
 
+        @Override
         public void lockInterruptibly() throws InterruptedException {
         }
 
+        @Override
         public boolean tryLock() {
             return true;
         }
 
+        @Override
         public boolean tryLock(long paramLong, TimeUnit paramTimeUnit) throws InterruptedException {
             return true;
         }
 
+        @Override
         public void unlock() {
         }
 
+        @Override
         public Condition newCondition() {
             return null;
         }

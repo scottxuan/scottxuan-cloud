@@ -60,21 +60,21 @@ public class CacheService {
         cacheService.redisTemplate.expire(key, timeout, TimeUnit.SECONDS);
     }
 
-    public static void setHash(String key, String value_key, Object value) {
+    public static void setHash(String key, String valueKey, Object value) {
         if (StringUtils.isEmpty(key)) {
             throw new IllegalArgumentException("key cannot be empty.");
         }
-        if (StringUtils.isEmpty(value_key)) {
-            throw new IllegalArgumentException("value_key cannot be empty.");
+        if (StringUtils.isEmpty(valueKey)) {
+            throw new IllegalArgumentException("valueKey cannot be empty.");
         }
-        cacheService.redisTemplate.opsForHash().put(key, value_key, value);
+        cacheService.redisTemplate.opsForHash().put(key, valueKey, value);
     }
 
-    public static Object getHash(String key, String value_key) {
+    public static Object getHash(String key, String valueKey) {
         if (StringUtils.isEmpty(key)) {
             throw new IllegalArgumentException("key cannot be empty.");
         }
-        return cacheService.redisTemplate.opsForHash().get(key, value_key);
+        return cacheService.redisTemplate.opsForHash().get(key, valueKey);
     }
 
     public static List<Object> getHashValues(String key) {
@@ -98,12 +98,12 @@ public class CacheService {
         return cacheService.redisTemplate.opsForHash().entries(key);
     }
 
-    public static Long deleteHash(String key, String... value_keys) {
+    public static Long deleteHash(String key, String... valueKeys) {
         if (StringUtils.isEmpty(key)) {
             throw new IllegalArgumentException("key cannot be empty.");
         }
-        if (value_keys != null && value_keys.length > 0) {
-            return cacheService.redisTemplate.opsForHash().delete(key, value_keys);
+        if (valueKeys != null && valueKeys.length > 0) {
+            return cacheService.redisTemplate.opsForHash().delete(key, valueKeys);
         }
         return 0L;
     }
@@ -115,14 +115,14 @@ public class CacheService {
         return cacheService.redisTemplate.hasKey(key);
     }
 
-    public static Boolean containHashKey(String key, String value_key) {
+    public static Boolean containHashKey(String key, String valueKey) {
         if (StringUtils.isEmpty(key)) {
             throw new IllegalArgumentException("key cannot be empty.");
         }
-        if (StringUtils.isEmpty(value_key)) {
-            throw new IllegalArgumentException("value_key cannot be empty.");
+        if (StringUtils.isEmpty(valueKey)) {
+            throw new IllegalArgumentException("valueKey cannot be empty.");
         }
-        return cacheService.redisTemplate.opsForHash().hasKey(key, value_key);
+        return cacheService.redisTemplate.opsForHash().hasKey(key, valueKey);
     }
 
     public static void delete(String key) {

@@ -1,8 +1,6 @@
 package scottxuan.cloud.web.i18n;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
-import scottxuan.cloud.base.utils.ObjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +15,7 @@ public class I18nLocaleResolver implements LocaleResolver {
 
     @Override
     public Locale resolveLocale(HttpServletRequest req) {
-        String i18n_language = req.getParameter(I18N_LANGUAGE);
+        String i18nLanguage = req.getParameter(I18N_LANGUAGE);
         return Locale.getDefault();
     }
 

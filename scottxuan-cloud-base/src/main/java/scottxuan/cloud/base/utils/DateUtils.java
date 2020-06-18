@@ -9,9 +9,9 @@ import java.util.Date;
  * @author : scottxuan
  */
 public class DateUtils {
-    private static final String simpleDate = "yyyy-MM-dd";
-    private static final String simpleTime = "HH:mm:ss";
-    private static final String simpleDateTime = "yyyy-MM-dd HH:mm:ss";
+    private static final String SIMPLE_DATE = "yyyy-MM-dd";
+    private static final String SIMPLE_TIME = "HH:mm:ss";
+    private static final String SIMPLE_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
 
     /**
      * 获得当前时间的yyyy-MM-dd格式字符串
@@ -28,7 +28,7 @@ public class DateUtils {
      * @return String
      */
     public static String getCurrentDateTime(){
-        DateTimeFormatter  df = DateTimeFormatter.ofPattern(simpleDateTime);
+        DateTimeFormatter  df = DateTimeFormatter.ofPattern(SIMPLE_DATE_TIME);
         LocalDate today = LocalDate.now();
         return today.format(df);
     }
@@ -38,7 +38,7 @@ public class DateUtils {
      * @return String
      */
     public static String getCurrentDate(){
-        DateTimeFormatter  df = DateTimeFormatter.ofPattern(simpleDate);
+        DateTimeFormatter  df = DateTimeFormatter.ofPattern(SIMPLE_DATE);
         LocalDate today = LocalDate.now();
         return today.format(df);
     }
@@ -48,7 +48,7 @@ public class DateUtils {
      * @return String
      */
     public static String getCurrentTime() {
-        DateTimeFormatter  df = DateTimeFormatter.ofPattern(simpleTime);
+        DateTimeFormatter  df = DateTimeFormatter.ofPattern(SIMPLE_TIME);
         LocalDate today = LocalDate.now();
         return today.format(df);
     }
@@ -62,7 +62,7 @@ public class DateUtils {
         if (date == null) {
             return "";
         }
-        SimpleDateFormat format = new SimpleDateFormat(simpleDateTime);
+        SimpleDateFormat format = new SimpleDateFormat(SIMPLE_DATE_TIME);
         return format.format(date);
     }
 
@@ -75,7 +75,7 @@ public class DateUtils {
         if (date == null) {
             return "";
         }
-        SimpleDateFormat format = new SimpleDateFormat(simpleDate);
+        SimpleDateFormat format = new SimpleDateFormat(SIMPLE_DATE);
         return format.format(date);
     }
 
@@ -88,7 +88,7 @@ public class DateUtils {
         if (date == null) {
             return "";
         }
-        SimpleDateFormat format = new SimpleDateFormat(simpleTime);
+        SimpleDateFormat format = new SimpleDateFormat(SIMPLE_TIME);
         return format.format(date);
     }
 
@@ -101,7 +101,7 @@ public class DateUtils {
         if (localDate == null) {
             return "";
         }
-        DateTimeFormatter  df = DateTimeFormatter.ofPattern(simpleDateTime);
+        DateTimeFormatter  df = DateTimeFormatter.ofPattern(SIMPLE_DATE_TIME);
         return localDate.format(df);
     }
 
@@ -114,7 +114,7 @@ public class DateUtils {
         if (localDate == null) {
             return "";
         }
-        DateTimeFormatter  df = DateTimeFormatter.ofPattern(simpleDate);
+        DateTimeFormatter  df = DateTimeFormatter.ofPattern(SIMPLE_DATE);
         return localDate.format(df);
     }
 
@@ -127,7 +127,7 @@ public class DateUtils {
         if (localDate == null) {
             return "";
         }
-        DateTimeFormatter  df = DateTimeFormatter.ofPattern(simpleTime);
+        DateTimeFormatter  df = DateTimeFormatter.ofPattern(SIMPLE_TIME);
         return localDate.format(df);
     }
 

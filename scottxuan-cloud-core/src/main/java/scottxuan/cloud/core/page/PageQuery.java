@@ -16,8 +16,12 @@ public class PageQuery{
     }
 
     public static void start(Integer pageIndex, Integer pageSize, String sort) {
-        if (pageIndex < PageParam.minPageIndex) pageIndex = PageParam.minPageIndex;
-        if (pageSize > PageParam.maxPageSize) pageSize = PageParam.minPageIndex;
+        if (pageIndex < PageParam.MIN_PAGE_INDEX) {
+            pageIndex = PageParam.MIN_PAGE_INDEX;
+        }
+        if (pageSize > PageParam.MAX_PAGE_SIZE) {
+            pageSize = PageParam.MIN_PAGE_INDEX;
+        }
         if (StringUtils.isNotEmpty(sort)) {
             PageHelper.startPage(pageIndex, pageSize, sort + " asc");
         }else{
@@ -26,8 +30,12 @@ public class PageQuery{
     }
 
     public static void start(Integer pageIndex, Integer pageSize, String sort, Boolean asc) {
-        if (pageIndex < PageParam.minPageIndex) pageIndex = PageParam.minPageIndex;
-        if (pageSize > PageParam.maxPageSize) pageSize = PageParam.minPageIndex;
+        if (pageIndex < PageParam.MIN_PAGE_INDEX) {
+            pageIndex = PageParam.MIN_PAGE_INDEX;
+        }
+        if (pageSize > PageParam.MAX_PAGE_SIZE) {
+            pageSize = PageParam.MIN_PAGE_INDEX;
+        }
         if (StringUtils.isNotEmpty(sort)) {
             PageHelper.startPage(pageIndex, pageSize, sort + (asc ? " asc" : " desc"));
         }else{

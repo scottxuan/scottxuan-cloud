@@ -13,10 +13,10 @@ import java.util.Map;
 @Configuration
 public class QueueConfig {
 
-    private static final String delay_message_type = "x-delayed-message";
-    private static final String delay_exchange = "delay-exchange";
-    private static final String delay_message_args_key = "x-delayed-type";
-    private static final String delay_message_args_value = "direct";
+    private static final String DELAY_MESSAGE_TYPE = "x-delayed-message";
+    private static final String DELAY_EXCHANGE = "delay-exchange";
+    private static final String DELAY_MESSAGE_ARGS_KEY = "x-delayed-type";
+    private static final String DELAY_MESSAGE_ARGS_VALUE = "direct";
 
     /**
      * delay exchange
@@ -25,7 +25,7 @@ public class QueueConfig {
     @Bean
     public CustomExchange delayExchange() {
         Map<String, Object> args = new HashMap<>();
-        args.put(delay_message_args_key, delay_message_args_value);
-        return new CustomExchange(delay_exchange, delay_message_type,true, false,args);
+        args.put(DELAY_MESSAGE_ARGS_KEY, DELAY_MESSAGE_ARGS_VALUE);
+        return new CustomExchange(DELAY_EXCHANGE, DELAY_MESSAGE_TYPE,true, false,args);
     }
 }

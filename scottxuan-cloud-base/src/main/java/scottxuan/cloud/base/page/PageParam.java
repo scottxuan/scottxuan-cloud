@@ -7,8 +7,8 @@ import lombok.Getter;
  */
 @Getter
 public class PageParam {
-    public static final Integer minPageIndex = 1;
-    public static final Integer maxPageSize = 10000;
+    public static final Integer MIN_PAGE_INDEX = 1;
+    public static final Integer MAX_PAGE_SIZE = 10000;
 
     private Integer pageIndex;
     private Integer pageSize;
@@ -16,10 +16,10 @@ public class PageParam {
     private Boolean asc = Boolean.TRUE;
 
     public PageParam(Integer pageIndex, Integer pageSize) {
-        if (pageIndex < minPageIndex) {
-            this.pageIndex = minPageIndex;
-        } else if (pageSize > maxPageSize) {
-            this.pageSize = minPageIndex;
+        if (pageIndex < MIN_PAGE_INDEX) {
+            this.pageIndex = MIN_PAGE_INDEX;
+        } else if (pageSize > MAX_PAGE_SIZE) {
+            this.pageSize = MIN_PAGE_INDEX;
         } else {
             this.pageIndex = pageIndex;
             this.pageSize = pageSize;
@@ -27,10 +27,10 @@ public class PageParam {
     }
 
     public PageParam(Integer pageIndex, Integer pageSize, String sort) {
-        if (pageIndex < minPageIndex) {
-            this.pageIndex = minPageIndex;
-        } else if (pageSize > maxPageSize) {
-            this.pageSize = minPageIndex;
+        if (pageIndex < MIN_PAGE_INDEX) {
+            this.pageIndex = MIN_PAGE_INDEX;
+        } else if (pageSize > MAX_PAGE_SIZE) {
+            this.pageSize = MIN_PAGE_INDEX;
         } else {
             this.pageIndex = pageIndex;
             this.pageSize = pageSize;
@@ -39,10 +39,10 @@ public class PageParam {
     }
 
     public PageParam(Integer pageIndex, Integer pageSize, String sort, Boolean asc) {
-        if (pageIndex < minPageIndex) {
-            this.pageIndex = minPageIndex;
-        } else if (pageSize > maxPageSize) {
-            this.pageSize = minPageIndex;
+        if (pageIndex < MIN_PAGE_INDEX) {
+            this.pageIndex = MIN_PAGE_INDEX;
+        } else if (pageSize > MAX_PAGE_SIZE) {
+            this.pageSize = MIN_PAGE_INDEX;
         } else {
             this.pageIndex = pageIndex;
             this.pageSize = pageSize;

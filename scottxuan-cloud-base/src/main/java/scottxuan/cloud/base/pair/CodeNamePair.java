@@ -15,6 +15,7 @@ public class CodeNamePair implements Serializable {
     private String code;
     private String name;
 
+    @Override
     public String toString() {
         if (this.name == null) {
             return this.code;

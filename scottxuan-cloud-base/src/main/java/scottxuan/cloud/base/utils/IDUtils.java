@@ -13,7 +13,7 @@ public class IDUtils {
     private static SnowflakeIdWorker worker = null;
 
     public static String generatorId() {
-        return String.valueOf(getLongUUID());
+        return String.valueOf(getLongUuid());
     }
 
     /**
@@ -48,7 +48,7 @@ public class IDUtils {
         }
     }
 
-    private static long getLongUUID() {
+    private static long getLongUuid() {
         return getSnowflakeIdWorker().nextId();
     }
 }

@@ -16,11 +16,13 @@ import java.io.Serializable;
 public class ICodeNamePair implements Serializable {
     private Integer code;
     private String name;
+
+    @Override
     public String toString() {
         if (this.name == null) {
-            return this.code+"";
+            return this.code + "";
         } else {
-            int len = (this.code+"").length() + 1 + this.name.length();
+            int len = (this.code + "").length() + 1 + this.name.length();
             StringBuilder buffer = new StringBuilder(len);
             buffer.append(this.code);
             buffer.append(":");

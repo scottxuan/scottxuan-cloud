@@ -13,12 +13,13 @@ import java.util.function.Supplier;
 /**
  * @author : scottxuan
  */
-public final class ResultBo<T> implements IResult<T>{
+public final class ResultBo<T> implements IResult<T> {
 
     private static final ResultBo<?> EMPTY = new ResultBo<>();
     private final T value;
-    private IError error ;
+    private IError error;
     private Object[] args;
+
     private ResultBo() {
         this.error = ErrorCodes.OPERATE_SUCCESS;
         this.value = null;
@@ -29,13 +30,13 @@ public final class ResultBo<T> implements IResult<T>{
         this.value = value;
     }
 
-    private ResultBo(IError error , Object... args) {
+    private ResultBo(IError error, Object... args) {
         this.value = null;
-        this.error  = error ;
+        this.error = error;
         this.args = args;
     }
 
-    public static<T> ResultBo<T> empty() {
+    public static <T> ResultBo<T> empty() {
         @SuppressWarnings("unchecked")
         ResultBo<T> t = (ResultBo<T>) EMPTY;
         return t;
@@ -45,12 +46,12 @@ public final class ResultBo<T> implements IResult<T>{
         return new ResultBo<>(value);
     }
 
-    public static <T> ResultBo<T> of(IError error ) {
+    public static <T> ResultBo<T> of(IError error) {
         return new ResultBo<T>(error);
     }
 
-    public static <T> ResultBo<T> of(IError error , Object... args) {
-        return new ResultBo<>(error ,args);
+    public static <T> ResultBo<T> of(IError error, Object... args) {
+        return new ResultBo<>(error, args);
     }
 
     public static <T> ResultBo<T> ofNullable(T value) {
@@ -73,32 +74,34 @@ public final class ResultBo<T> implements IResult<T>{
     }
 
     public void ifPresent(Consumer<? super T> consumer) {
-        if (value != null)
+        if (value != null) {
             consumer.accept(value);
+        }
     }
 
     public ResultBo<T> filter(Predicate<? super T> predicate) {
         Objects.requireNonNull(predicate);
-        if (!isPresent())
+        if (!isPresent()) {
             return this;
-        else
+        } else {
             return predicate.test(value) ? this : empty();
+        }
     }
 
-    public<U> ResultBo<U> map(Function<? super T, ? extends U> mapper) {
+    public <U> ResultBo<U> map(Function<? super T, ? extends U> mapper) {
         Objects.requireNonNull(mapper);
-        if (!isPresent())
+        if (!isPresent()) {
             return empty();
-        else {
+        } else {
             return ResultBo.ofNullable(mapper.apply(value));
         }
     }
 
-    public<U> ResultBo<U> flatMap(Function<? super T, ResultBo<U>> mapper) {
+    public <U> ResultBo<U> flatMap(Function<? super T, ResultBo<U>> mapper) {
         Objects.requireNonNull(mapper);
-        if (!isPresent())
+        if (!isPresent()) {
             return empty();
-        else {
+        } else {
             return Objects.requireNonNull(mapper.apply(value));
         }
     }
@@ -152,17 +155,19 @@ public final class ResultBo<T> implements IResult<T>{
 
     @Override
     public IError getError() {
-        return error ;
+        return error;
     }
 
+    @Override
     public Object[] getArgs() {
         return args;
     }
 
+    @Override
     public boolean isSuccess() {
-        if (this.error  == null) {
+        if (this.error == null) {
             return Boolean.TRUE;
-        }else{
+        } else {
             return this.error.getCode() == 200;
         }
     }

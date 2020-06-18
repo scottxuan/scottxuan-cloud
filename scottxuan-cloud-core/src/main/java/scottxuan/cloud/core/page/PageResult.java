@@ -101,23 +101,25 @@ public class PageResult<T> implements IPageResult {
     }
 
     public void ifPresent(Consumer<? super List<T>> consumer) {
-        if (value != null)
+        if (value != null) {
             consumer.accept(value);
+        }
     }
 
     public PageResult<T> filter(Predicate<? super List<T>> predicate) {
         Objects.requireNonNull(predicate);
-        if (!isPresent())
+        if (!isPresent()) {
             return this;
-        else
+        } else {
             return predicate.test(value) ? this : empty();
+        }
     }
 
     public <U> PageResult<U> flatMap(Function<? super List<T>, PageResult<U>> mapper) {
         Objects.requireNonNull(mapper);
-        if (!isPresent())
+        if (!isPresent()) {
             return empty();
-        else {
+        } else {
             return Objects.requireNonNull(mapper.apply(value));
         }
     }
