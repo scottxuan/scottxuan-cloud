@@ -1,4 +1,4 @@
-package scottxuan.cloud.base.utils;
+package scottxuan.cloud.core.utils;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapperImpl;
