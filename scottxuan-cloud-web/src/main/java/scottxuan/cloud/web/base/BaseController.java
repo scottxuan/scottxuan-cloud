@@ -6,7 +6,7 @@ import scottxuan.cloud.base.result.IResult;
 import scottxuan.cloud.base.result.ResultBo;
 import scottxuan.cloud.web.result.PageResultDto;
 import scottxuan.cloud.web.result.ResultDto;
-import scottxuan.cloud.base.error.Error;
+import scottxuan.cloud.base.error.IError;
 
 /**
  * @author : scottxuan
@@ -28,11 +28,11 @@ public abstract class BaseController {
         }
     }
 
-    protected ResultDto getFailedDto(Error error){
+    protected ResultDto getFailedDto(IError error){
         return new ResultDto(error);
     }
 
-    protected ResultDto getFailedDto(Error error, Object... args){
+    protected ResultDto getFailedDto(IError error, Object... args){
         return new ResultDto(error,args);
     }
 

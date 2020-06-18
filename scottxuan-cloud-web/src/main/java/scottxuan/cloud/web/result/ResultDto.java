@@ -2,7 +2,7 @@ package scottxuan.cloud.web.result;
 
 import lombok.Data;
 import scottxuan.cloud.base.error.ErrorCodes;
-import scottxuan.cloud.base.error.Error;
+import scottxuan.cloud.base.error.IError;
 import scottxuan.cloud.base.result.ResultBo;
 import scottxuan.cloud.web.i18n.I18nUtils;
 
@@ -29,12 +29,12 @@ public class ResultDto<T> implements Serializable {
         this.data = data;
     }
 
-    public ResultDto(Error error) {
+    public ResultDto(IError error) {
         this.code = error.getCode();
         this.message = I18nUtils.getMessage(error.getMessage());
     }
 
-    public ResultDto(Error error, Object... args) {
+    public ResultDto(IError error, Object... args) {
         this.code = error.getCode();
         this.message = I18nUtils.getMessage(error.getMessage(), args);
     }
@@ -47,7 +47,7 @@ public class ResultDto<T> implements Serializable {
         this.setData(resultBo.getValue());
     }
 
-    protected void setError(Error error, Object... args) {
+    protected void setError(IError error, Object... args) {
         this.code = error.getCode();
         this.message = I18nUtils.getMessage(error.getMessage(), args);
     }

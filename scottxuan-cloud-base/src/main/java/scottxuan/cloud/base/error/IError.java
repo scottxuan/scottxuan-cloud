@@ -3,7 +3,7 @@ package scottxuan.cloud.base.error;
 /**
  * @author : scottxuan
  */
-public interface Error {
+public interface IError {
     int getCode();
     String getMessage();
 }

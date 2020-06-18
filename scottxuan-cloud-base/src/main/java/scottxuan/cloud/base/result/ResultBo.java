@@ -1,7 +1,7 @@
 package scottxuan.cloud.base.result;
 
 import scottxuan.cloud.base.error.ErrorCodes;
-import scottxuan.cloud.base.error.Error;
+import scottxuan.cloud.base.error.IError;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -17,7 +17,7 @@ public final class ResultBo<T> implements IResult<T>{
 
     private static final ResultBo<?> EMPTY = new ResultBo<>();
     private final T value;
-    private Error error ;
+    private IError error ;
     private Object[] args;
     private ResultBo() {
         this.error = ErrorCodes.OPERATE_SUCCESS;
@@ -29,7 +29,7 @@ public final class ResultBo<T> implements IResult<T>{
         this.value = value;
     }
 
-    private ResultBo(Error error , Object... args) {
+    private ResultBo(IError error , Object... args) {
         this.value = null;
         this.error  = error ;
         this.args = args;
@@ -45,11 +45,11 @@ public final class ResultBo<T> implements IResult<T>{
         return new ResultBo<>(value);
     }
 
-    public static <T> ResultBo<T> of(Error error ) {
+    public static <T> ResultBo<T> of(IError error ) {
         return new ResultBo<T>(error);
     }
 
-    public static <T> ResultBo<T> of(Error error , Object... args) {
+    public static <T> ResultBo<T> of(IError error , Object... args) {
         return new ResultBo<>(error ,args);
     }
 
@@ -151,7 +151,7 @@ public final class ResultBo<T> implements IResult<T>{
     }
 
     @Override
-    public Error getError() {
+    public IError getError() {
         return error ;
     }
 

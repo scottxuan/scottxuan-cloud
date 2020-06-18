@@ -1,7 +1,7 @@
 package scottxuan.cloud.base.exception;
 
 import lombok.Getter;
-import scottxuan.cloud.base.error.Error;
+import scottxuan.cloud.base.error.IError;
 
 /**
  * @author : zhaoxuan
@@ -13,13 +13,13 @@ public class BizException extends RuntimeException{
     private String errorMsgKey;
     private Object[] args;
 
-    public BizException(Error error) {
+    public BizException(IError error) {
         super(String.valueOf(error.getCode()));
         this.errorCode = error.getCode();
         this.errorMsgKey = error.getMessage();
     }
 
-    public BizException(Error error,Object... args) {
+    public BizException(IError error, Object... args) {
         super(String.valueOf(error.getCode()));
         this.errorCode = error.getCode();
         this.errorMsgKey = error.getMessage();

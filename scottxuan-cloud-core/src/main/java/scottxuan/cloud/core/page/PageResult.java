@@ -2,7 +2,7 @@ package scottxuan.cloud.core.page;
 
 import com.google.common.collect.Lists;
 import scottxuan.cloud.base.error.ErrorCodes;
-import scottxuan.cloud.base.error.Error;
+import scottxuan.cloud.base.error.IError;
 import scottxuan.cloud.base.page.Page;
 import scottxuan.cloud.base.result.IPageResult;
 
@@ -22,7 +22,7 @@ public class PageResult<T> implements IPageResult {
 
     private final List<T> value;
     private Page page;
-    private Error error;
+    private IError error;
     private Object[] args;
 
     private PageResult() {
@@ -43,13 +43,13 @@ public class PageResult<T> implements IPageResult {
         this.error = ErrorCodes.OPERATE_SUCCESS;
     }
 
-    private PageResult(Error error) {
+    private PageResult(IError error) {
         this.value = Lists.newArrayList();
         this.page = new Page();
         this.error = error;
     }
 
-    private PageResult(Error error, Object... args) {
+    private PageResult(IError error, Object... args) {
         this.value = Lists.newArrayList();
         this.page = new Page();
         this.error = error;
@@ -79,11 +79,11 @@ public class PageResult<T> implements IPageResult {
         return new PageResult<>(value, page);
     }
 
-    public static <T> PageResult<T> of(Error error) {
+    public static <T> PageResult<T> of(IError error) {
         return new PageResult<T>(error);
     }
 
-    public static <T> PageResult<T> of(Error error, Object... args) {
+    public static <T> PageResult<T> of(IError error, Object... args) {
         return new PageResult<T>(error, args);
     }
 
@@ -176,7 +176,7 @@ public class PageResult<T> implements IPageResult {
     }
 
     @Override
-    public Error getError() {
+    public IError getError() {
         return error;
     }
 

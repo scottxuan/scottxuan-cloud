@@ -1,13 +1,13 @@
 package scottxuan.cloud.base.result;
 
-import scottxuan.cloud.base.error.Error;
+import scottxuan.cloud.base.error.IError;
 /**
  * @author : zhaoxuan
  */
 public interface IResult<T> {
     T getValue();
 
-    Error getError();
+    IError getError();
 
     Object[] getArgs();
 
