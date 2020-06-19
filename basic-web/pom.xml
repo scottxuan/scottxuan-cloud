@@ -15,8 +15,8 @@
     <dependencies>
         <dependency>
             <groupId>com.scottxuan.basic</groupId>
-            <artifactId>basic-base</artifactId>
-            <version>${basic.base.version}</version>
+            <artifactId>basic-core</artifactId>
+            <version>${basic.core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -33,6 +33,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.crazycake</groupId>
+            <artifactId>shiro-redis</artifactId>
         </dependency>
     </dependencies>
 
