@@ -17,6 +17,7 @@ public class JsonUtils {
      * Object转JsonString
      * @param object
      * @return
+     * @throws JsonProcessingException
      */
     public static String toJsonString(Object object) throws JsonProcessingException {
         if (ObjectUtils.isNotEmpty(object)) {
@@ -31,6 +32,7 @@ public class JsonUtils {
      * @param jsonString
      * @param clazz
      * @return
+     * @throws IOException
      */
     public static Object parseObject(String jsonString, Class clazz) throws IOException {
         if (StringUtils.isNotEmpty(jsonString) && ObjectUtils.isNotEmpty(clazz)) {
