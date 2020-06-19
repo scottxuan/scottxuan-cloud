@@ -9,6 +9,9 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+/**
+ * @author scottxuan
+ */
 public abstract class AbstractSwaggerConfig {
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -29,11 +32,31 @@ public abstract class AbstractSwaggerConfig {
                 .build();
     }
 
+    /**
+     * swagger扫描的包
+     *
+     * @return
+     */
     abstract String getBasePackage();
 
+    /**
+     * 文档标题
+     *
+     * @return
+     */
     abstract String getTitle();
 
+    /**
+     * 文档描述
+     *
+     * @return
+     */
     abstract String getDescription();
 
+    /**
+     * 文档版本
+     *
+     * @return
+     */
     abstract String getVersion();
 }

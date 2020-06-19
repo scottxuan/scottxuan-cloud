@@ -11,21 +11,18 @@ import java.io.IOException;
  * @author : scottxuan
  */
 @Slf4j
-public class JSONUtils {
+public class JsonUtils {
 
     /**
      * Object转JsonString
      * @param object
      * @return
+     * @throws JsonProcessingException
      */
-    public static String toJsonString(Object object){
+    public static String toJsonString(Object object) throws JsonProcessingException {
         if (ObjectUtils.isNotEmpty(object)) {
             ObjectMapper mapper = new ObjectMapper();
-            try {
-                return mapper.writeValueAsString(object);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
+            return mapper.writeValueAsString(object);
         }
         return "";
     }
@@ -35,15 +32,12 @@ public class JSONUtils {
      * @param jsonString
      * @param clazz
      * @return
+     * @throws IOException
      */
-    public static Object parseObject(String jsonString, Class clazz){
+    public static Object parseObject(String jsonString, Class clazz) throws IOException {
         if (StringUtils.isNotEmpty(jsonString) && ObjectUtils.isNotEmpty(clazz)) {
             ObjectMapper mapper = new ObjectMapper();
-            try {
-                return mapper.readValue(jsonString, clazz);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            return mapper.readValue(jsonString, clazz);
         }
         return null;
     }

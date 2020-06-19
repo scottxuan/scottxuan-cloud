@@ -15,7 +15,11 @@ import java.util.List;
 @Service
 public abstract class BaseServiceImpl<T> implements BaseService<T>{
 
-    protected abstract BaseMapper<T> getMapper();
+    /**
+     * 获取dao操作的mapper
+     * @return
+     */
+    abstract BaseMapper<T> getMapper();
 
     @Override
     public Integer insert(T t) {
