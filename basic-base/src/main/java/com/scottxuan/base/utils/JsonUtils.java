@@ -18,14 +18,10 @@ public class JsonUtils {
      * @param object
      * @return
      */
-    public static String toJsonString(Object object){
+    public static String toJsonString(Object object) throws JsonProcessingException {
         if (ObjectUtils.isNotEmpty(object)) {
             ObjectMapper mapper = new ObjectMapper();
-            try {
-                return mapper.writeValueAsString(object);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
+            return mapper.writeValueAsString(object);
         }
         return "";
     }
@@ -36,14 +32,10 @@ public class JsonUtils {
      * @param clazz
      * @return
      */
-    public static Object parseObject(String jsonString, Class clazz){
+    public static Object parseObject(String jsonString, Class clazz) throws IOException {
         if (StringUtils.isNotEmpty(jsonString) && ObjectUtils.isNotEmpty(clazz)) {
             ObjectMapper mapper = new ObjectMapper();
-            try {
-                return mapper.readValue(jsonString, clazz);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            return mapper.readValue(jsonString, clazz);
         }
         return null;
     }
