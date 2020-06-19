@@ -4,14 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.scottxuan.cloud</groupId>
-    <artifactId>scottxuan-cloud</artifactId>
+    <groupId>com.scottxuan.basic</groupId>
+    <artifactId>basic</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
-        <module>scottxuan-cloud-base</module>
-        <module>scottxuan-cloud-core</module>
-        <module>scottxuan-cloud-web</module>
+        <module>basic-base</module>
+        <module>basic-core</module>
+        <module>basic-web</module>
     </modules>
 
     <parent>
@@ -22,30 +23,31 @@
     </parent>
 
     <properties>
-        <scottxuan.cloud.base.version>1.0-SNAPSHOT</scottxuan.cloud.base.version>
-        <scottxuan.cloud.core.version>1.0-SNAPSHOT</scottxuan.cloud.core.version>
-        <scottxuan.cloud.web.version>1.0-SNAPSHOT</scottxuan.cloud.web.version>
-
+        <!-- 子包版本管理 -->
+        <basic.base.version>1.0-SNAPSHOT</basic.base.version>
+        <basic.core.version>1.0-SNAPSHOT</basic.core.version>
+        <basic.web.version>1.0-SNAPSHOT</basic.web.version>
+        <!-- 编译相关 -->
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
+        <!-- SpringCloud -->
         <spring.cloud.version>Hoxton.RELEASE</spring.cloud.version>
-
+        <!-- LomBack 及 工具类 -->
         <google.guava.version>28.1-jre</google.guava.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <lombok.version>1.18.8</lombok.version>
-
+        <!-- MySQL数据库相关 -->
         <mysql.version>8.0.17</mysql.version>
         <druid-springboot.version>1.1.22</druid-springboot.version>
         <mybatis-spring.version>2.1.1</mybatis-spring.version>
         <tkmybatis-spring.version>2.1.5</tkmybatis-spring.version>
         <mybatis-pagehelper.version>1.2.3</mybatis-pagehelper.version>
-
+        <!-- json相关 -->
         <jackson.version>2.9.9</jackson.version>
         <jackson.datatype>2.10.1</jackson.datatype>
         <jackson-databind.varsion>2.9.9.3</jackson-databind.varsion>
-
+        <!-- Swagger -->
         <swagger2.version>2.8.0</swagger2.version>
     </properties>
 
@@ -115,20 +117,7 @@
     </repositories>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
