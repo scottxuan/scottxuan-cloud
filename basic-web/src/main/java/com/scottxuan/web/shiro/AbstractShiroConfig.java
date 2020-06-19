@@ -164,13 +164,13 @@ public abstract class AbstractShiroConfig {
     /**
      * 开启shiro aop注解支持. 使用代理方式;所以需要开启代码支持;
      */
-//    @Bean("authorizationAttributeSourceAdvisor")
-//    @DependsOn({"securityManager"})
-//    protected AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
-//        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-//        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
-//        return authorizationAttributeSourceAdvisor;
-//    }
+    @Bean("authorizationAttributeSourceAdvisor")
+    @DependsOn({"securityManager"})
+    protected AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
+    }
 
     @Bean("advisorAutoProxyCreator")
     protected DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
