@@ -40,7 +40,8 @@ public class IDUtils {
             //服务器集群中IP地址一般是连续的，所以取IP地址最后5位，基本可以保证serverId不会重复
             byte[] bytes = InetAddress.getLocalHost().getAddress();
             byte byta = bytes[3];
-            int num = ((byta & 0x1F) & 0xFF); //取IP地址的最后5位bit
+            //取IP地址的最后5位bit
+            int num = ((byta & 0x1F) & 0xFF);
             return num;
         } catch (Exception ex) {
             //获取不到IP，取随机码
