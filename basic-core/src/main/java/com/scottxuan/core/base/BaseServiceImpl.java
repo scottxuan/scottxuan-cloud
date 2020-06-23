@@ -19,7 +19,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>{
      * 获取dao操作的mapper
      * @return
      */
-    abstract BaseMapper<T> getMapper();
+    protected abstract BaseMapper<T> getMapper();
 
     @Override
     public Integer insert(T t) {

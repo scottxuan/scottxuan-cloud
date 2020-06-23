@@ -2,6 +2,7 @@ package com.scottxuan.web.swagger;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -37,26 +38,26 @@ public abstract class AbstractSwaggerConfig {
      *
      * @return
      */
-    abstract String getBasePackage();
+    protected abstract String getBasePackage();
 
     /**
      * 文档标题
      *
      * @return
      */
-    abstract String getTitle();
+    protected abstract String getTitle();
 
     /**
      * 文档描述
      *
      * @return
      */
-    abstract String getDescription();
+    protected abstract String getDescription();
 
     /**
      * 文档版本
      *
      * @return
      */
-    abstract String getVersion();
+    protected abstract String getVersion();
 }
