@@ -1,17 +1,19 @@
 package com.scottxuan.web.result;
 
-import lombok.Data;
+import com.scottxuan.base.utils.ObjectUtils;
 import com.scottxuan.base.error.ErrorCodes;
 import com.scottxuan.base.error.IError;
 import com.scottxuan.base.result.ResultBo;
 import com.scottxuan.web.i18n.I18nUtils;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.function.Consumer;
 
 /**
  * @author : scottxuan
  */
-@Data
 public class ResultDto<T> implements Serializable {
     private static final long serialVersionUID = -3728530737570138336L;
     private int code;
@@ -44,11 +46,29 @@ public class ResultDto<T> implements Serializable {
         this.data = resultBo.getValue();
         this.code = resultBo.getError().getCode();
         this.message = message;
-        this.setData(resultBo.getValue());
+        this.data = resultBo.getValue();
     }
 
     protected void setError(IError error, Object... args) {
         this.code = error.getCode();
         this.message = I18nUtils.getMessage(error.getMessage(), args);
+    }
+
+    public Boolean isSuccess() {
+        return this.code == ErrorCodes.OPERATE_SUCCESS.getCode();
+    }
+
+    public boolean isNotPresent() {
+        return !isPresent();
+    }
+
+    public boolean isPresent() {
+        return ObjectUtils.isNotEmpty(data);
+    }
+
+    public void ifPresent(Consumer<? super T> consumer) {
+        if (isPresent()) {
+            consumer.accept(data);
+        }
     }
 }

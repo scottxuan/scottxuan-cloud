@@ -17,12 +17,15 @@ public class JsonUtils {
      * Object转JsonString
      * @param object
      * @return
-     * @throws JsonProcessingException
      */
-    public static String toJsonString(Object object) throws JsonProcessingException {
+    public static String toJsonString(Object object){
         if (ObjectUtils.isNotEmpty(object)) {
             ObjectMapper mapper = new ObjectMapper();
-            return mapper.writeValueAsString(object);
+            try {
+                return mapper.writeValueAsString(object);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
         }
         return "";
     }
@@ -32,12 +35,15 @@ public class JsonUtils {
      * @param jsonString
      * @param clazz
      * @return
-     * @throws IOException
      */
-    public static Object parseObject(String jsonString, Class clazz) throws IOException {
+    public static Object parseObject(String jsonString, Class clazz){
         if (StringUtils.isNotEmpty(jsonString) && ObjectUtils.isNotEmpty(clazz)) {
             ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(jsonString, clazz);
+            try {
+                return mapper.readValue(jsonString, clazz);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
