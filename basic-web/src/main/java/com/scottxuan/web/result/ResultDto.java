@@ -5,8 +5,6 @@ import com.scottxuan.base.error.ErrorCodes;
 import com.scottxuan.base.error.IError;
 import com.scottxuan.base.result.ResultBo;
 import com.scottxuan.web.i18n.I18nUtils;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.function.Consumer;
