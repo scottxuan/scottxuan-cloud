@@ -1,10 +1,13 @@
 package com.scottxuan.web.result;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.scottxuan.base.utils.ObjectUtils;
 import com.scottxuan.base.error.ErrorCodes;
 import com.scottxuan.base.error.IError;
 import com.scottxuan.base.result.ResultBo;
 import com.scottxuan.web.i18n.I18nUtils;
+import lombok.Data;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.function.Consumer;
@@ -12,6 +15,8 @@ import java.util.function.Consumer;
 /**
  * @author : scottxuan
  */
+@JsonIgnoreProperties({"success", "notPresent", "present"})
+@Data
 public class ResultDto<T> implements Serializable {
     private static final long serialVersionUID = -3728530737570138336L;
     private int code;
