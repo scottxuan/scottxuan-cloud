@@ -34,7 +34,7 @@
         <!-- SpringCloud -->
         <spring.cloud.version>Hoxton.RELEASE</spring.cloud.version>
         <!-- LomBack 及 工具类 -->
-        <google.guava.version>28.1-jre</google.guava.version>
+        <google.guava.version>29.0-jre</google.guava.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <lombok.version>1.18.8</lombok.version>
         <!-- MySQL数据库相关 -->
