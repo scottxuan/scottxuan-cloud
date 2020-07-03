@@ -48,7 +48,7 @@
         <jackson.datatype>2.10.1</jackson.datatype>
         <jackson-databind.varsion>2.9.9.3</jackson-databind.varsion>
         <!-- Swagger -->
-        <swagger2.version>2.8.0</swagger2.version>
+        <swagger2.version>2.9.2</swagger2.version>
     </properties>
 
     <dependencyManagement>
