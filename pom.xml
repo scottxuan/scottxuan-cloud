@@ -24,9 +24,9 @@
 
     <properties>
         <!-- 子包版本管理 -->
-        <basic.base.version>1.0-SNAPSHOT</basic.base.version>
-        <basic.core.version>1.0-SNAPSHOT</basic.core.version>
-        <basic.web.version>1.0-SNAPSHOT</basic.web.version>
+        <basic.base.version>1.0</basic.base.version>
+        <basic.core.version>1.0</basic.core.version>
+        <basic.web.version>1.0</basic.web.version>
         <!-- 编译相关 -->
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
