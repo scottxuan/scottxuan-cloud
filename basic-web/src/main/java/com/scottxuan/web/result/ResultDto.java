@@ -61,10 +61,6 @@ public class ResultDto<T> implements Serializable {
         return this.code == ErrorCodes.OPERATE_SUCCESS.getCode();
     }
 
-    public boolean isNotPresent() {
-        return !isPresent();
-    }
-
     public boolean isPresent() {
         return ObjectUtils.isNotEmpty(data);
     }
