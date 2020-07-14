@@ -150,4 +150,30 @@ public class CacheService {
     public static Long getExpireTime(String key) {
         return cacheService.redisTemplate.getExpire(key);
     }
+
+    public static boolean lock(String key, int timeout) {
+        if (StringUtils.isEmpty(key)) {
+            throw new IllegalArgumentException("key cannot be empty.");
+        }
+        String threadId = String.valueOf(Thread.currentThread().getId());
+        if (cacheService.redisTemplate.hasKey(key)) {
+            if (threadId.equals(cacheService.redisTemplate.opsForValue().get(key))) {
+                return Boolean.TRUE;
+            }
+        }
+        if (cacheService.redisTemplate.opsForValue().setIfAbsent(key, threadId, timeout, TimeUnit.SECONDS)) {
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
+    public static boolean unlock(String key) {
+        if (StringUtils.isEmpty(key)) {
+            throw new IllegalArgumentException("key cannot be empty.");
+        }
+        if (!cacheService.redisTemplate.hasKey(key) || cacheService.redisTemplate.delete(key)) {
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
 }
