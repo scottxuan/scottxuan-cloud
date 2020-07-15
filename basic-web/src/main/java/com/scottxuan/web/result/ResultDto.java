@@ -6,6 +6,7 @@ import com.scottxuan.base.error.ErrorCodes;
 import com.scottxuan.base.error.IError;
 import com.scottxuan.base.result.ResultBo;
 import com.scottxuan.web.i18n.I18nUtils;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Setter;
 
@@ -50,6 +51,11 @@ public class ResultDto<T> implements Serializable {
         this.code = resultBo.getError().getCode();
         this.message = message;
         this.data = resultBo.getValue();
+    }
+
+    public ResultDto(int code, String message) {
+        this.code = code;
+        this.message = message;
     }
 
     protected void setError(IError error, Object... args) {
