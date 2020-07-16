@@ -1,9 +1,11 @@
 package com.scottxuan.base.error;
 
+import java.io.Serializable;
+
 /**
  * @author : scottxuan
  */
-public interface IError {
+public interface IError extends Serializable {
     /**
      * 错误编码
      *
