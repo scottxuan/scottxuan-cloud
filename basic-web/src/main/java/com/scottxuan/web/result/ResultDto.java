@@ -1,6 +1,6 @@
 package com.scottxuan.web.result;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.scottxuan.base.utils.ObjectUtils;
 import com.scottxuan.base.error.ErrorCodes;
 import com.scottxuan.base.error.IError;
@@ -14,41 +14,45 @@ import java.util.function.Consumer;
 /**
  * @author : scottxuan
  */
-@JsonIgnoreProperties({"success", "notPresent", "present"})
 @Data
 public class ResultDto<T> implements Serializable {
     private static final long serialVersionUID = -3728530737570138336L;
     private int code;
     private String message;
     private T data;
+    @JsonIgnore
+    private IError error;
 
     public ResultDto() {
         this.code = ErrorCodes.OPERATE_SUCCESS.getCode();
         this.message = I18nUtils.getMessage(ErrorCodes.OPERATE_SUCCESS.getMessage());
+        this.error = ErrorCodes.OPERATE_SUCCESS;
     }
 
     public ResultDto(T data) {
         this.code = ErrorCodes.OPERATE_SUCCESS.getCode();
         this.message = I18nUtils.getMessage(ErrorCodes.OPERATE_SUCCESS.getMessage());
         this.data = data;
+        this.error = ErrorCodes.OPERATE_SUCCESS;
     }
 
     public ResultDto(IError error) {
         this.code = error.getCode();
         this.message = I18nUtils.getMessage(error.getMessage());
+        this.error = error;
     }
 
     public ResultDto(IError error, Object... args) {
         this.code = error.getCode();
         this.message = I18nUtils.getMessage(error.getMessage(), args);
+        this.error = error;
     }
 
     public ResultDto(ResultBo<T> resultBo) {
-        String message = I18nUtils.getMessage(resultBo.getError().getMessage(), resultBo.getArgs());
-        this.data = resultBo.getValue();
         this.code = resultBo.getError().getCode();
-        this.message = message;
+        this.message = I18nUtils.getMessage(resultBo.getError().getMessage(), resultBo.getArgs());
         this.data = resultBo.getValue();
+        this.error = resultBo.getError();
     }
 
     public ResultDto(int code, String message) {
@@ -59,13 +63,16 @@ public class ResultDto<T> implements Serializable {
     protected void setError(IError error, Object... args) {
         this.code = error.getCode();
         this.message = I18nUtils.getMessage(error.getMessage(), args);
+        this.error = error;
     }
 
+    @JsonIgnore
     public Boolean isSuccess() {
         return this.code == ErrorCodes.OPERATE_SUCCESS.getCode();
     }
 
-    public boolean isPresent() {
+    @JsonIgnore
+    public Boolean isPresent() {
         return ObjectUtils.isNotEmpty(data);
     }
 
