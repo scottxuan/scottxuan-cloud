@@ -32,7 +32,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- SpringCloud -->
-        <spring.cloud.version>Hoxton.RELEASE</spring.cloud.version>
+        <spring.cloud.version>Hoxton.SR6</spring.cloud.version>
         <!-- LomBack 及 工具类 -->
         <google.guava.version>29.0-jre</google.guava.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
