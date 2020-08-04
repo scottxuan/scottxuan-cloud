@@ -1,11 +1,8 @@
 package com.scottxuan.core.page;
 
-import com.scottxuan.base.error.ErrorCodes;
-import com.scottxuan.base.exception.ExceptionUtils;
 import com.scottxuan.base.page.PageParam;
 import com.scottxuan.base.page.QueryParam;
 import com.scottxuan.base.utils.ObjectUtils;
-import com.scottxuan.core.page.PageQuery;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -43,7 +40,7 @@ public class PageHelperAop {
         if (ObjectUtils.isNotEmpty(param)) {
             PageQuery.start(param);
         }else{
-            ExceptionUtils.throwException(ErrorCodes.ERROR_COMMON,"page query condition was not found");
+            PageQuery.start(new PageParam(1,10));
         }
         return point.proceed(args);
     }
