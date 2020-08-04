@@ -4,9 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -247,5 +245,33 @@ public class DateUtils {
         }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(SIMPLE_TIME);
         return LocalTime.parse(str, dtf);
+    }
+
+    public static Date localDateTime2Date(LocalDateTime localDateTime){
+        if(null == localDateTime) {
+            return null;
+        }
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public static Date localDate2Date(LocalDate localDate){
+        if(null == localDate) {
+            return null;
+        }
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public static LocalDateTime date2LocalDateTime(Date date){
+        if(null == date) {
+            return null;
+        }
+        return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    }
+
+    public static LocalDate date2LocalDate(Date date){
+        if(null == date) {
+            return null;
+        }
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 }
