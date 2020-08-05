@@ -22,6 +22,8 @@ public class ResultDto<T> implements Serializable {
     private T data;
     @JsonIgnore
     private IError error;
+    @JsonIgnore
+    private Object[] args;
 
     public ResultDto() {
         this.code = ErrorCodes.OPERATE_SUCCESS.getCode();
@@ -46,6 +48,7 @@ public class ResultDto<T> implements Serializable {
         this.code = error.getCode();
         this.message = I18nUtils.getMessage(error.getMessage(), args);
         this.error = error;
+        this.args = args;
     }
 
     public ResultDto(ResultBo<T> resultBo) {
@@ -64,6 +67,7 @@ public class ResultDto<T> implements Serializable {
         this.code = error.getCode();
         this.message = I18nUtils.getMessage(error.getMessage(), args);
         this.error = error;
+        this.args = args;
     }
 
     @JsonIgnore
