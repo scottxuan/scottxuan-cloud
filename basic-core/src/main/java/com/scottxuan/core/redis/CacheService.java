@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -27,115 +26,65 @@ public class CacheService {
     }
 
     public static Object get(String key) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
         return cacheService.redisTemplate.opsForValue().get(key);
     }
 
     public static void set(String key, Object value) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
         cacheService.redisTemplate.opsForValue().set(key, value);
     }
 
     public static void set(String key, Object value, long timeout) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
-        if (timeout < 0) {
-            throw new IllegalArgumentException("timeout cannot be less than zero.");
-        }
         cacheService.redisTemplate.opsForValue().set(key, value, timeout, TimeUnit.SECONDS);
     }
 
     public static void setTimeOut(String key, long timeout) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
-        if (timeout < 0) {
-            throw new IllegalArgumentException("timeout cannot be less than zero.");
-        }
         cacheService.redisTemplate.expire(key, timeout, TimeUnit.SECONDS);
     }
 
     public static void setHash(String key, String valueKey, Object value) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
-        if (StringUtils.isEmpty(valueKey)) {
-            throw new IllegalArgumentException("valueKey cannot be empty.");
-        }
         cacheService.redisTemplate.opsForHash().put(key, valueKey, value);
     }
 
     public static Object getHash(String key, String valueKey) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
         return cacheService.redisTemplate.opsForHash().get(key, valueKey);
     }
 
     public static List<Object> getHashValues(String key) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
         return cacheService.redisTemplate.opsForHash().values(key);
     }
 
     public static Set<Object> getHashKeys(String key) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
         return cacheService.redisTemplate.opsForHash().keys(key);
     }
 
     public static Map<Object, Object> getHashAll(String key) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
         return cacheService.redisTemplate.opsForHash().entries(key);
     }
 
     public static Long deleteHash(String key, String... valueKeys) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
         if (valueKeys != null && valueKeys.length > 0) {
-            return cacheService.redisTemplate.opsForHash().delete(key, valueKeys);
+            return cacheService.redisTemplate.opsForHash().delete(key, (Object) valueKeys);
         }
         return 0L;
     }
 
     public static Boolean containKey(String key) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
         return cacheService.redisTemplate.hasKey(key);
     }
 
     public static Boolean containHashKey(String key, String valueKey) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
         if (StringUtils.isEmpty(valueKey)) {
             throw new IllegalArgumentException("valueKey cannot be empty.");
         }
         return cacheService.redisTemplate.opsForHash().hasKey(key, valueKey);
     }
 
-    public static void delete(String key) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
-        cacheService.redisTemplate.delete(key);
+    public static Boolean delete(String key) {
+        return cacheService.redisTemplate.delete(key);
     }
 
     public static void delete(List<String> keys) {
-        if (!CollectionUtils.isEmpty(keys)) {
-            cacheService.redisTemplate.delete(keys);
-        }
+        cacheService.redisTemplate.delete(keys);
     }
 
     public static Set<String> keys(String key) {
@@ -144,12 +93,18 @@ public class CacheService {
 
     public static Long clear() {
         Set<String> keys = cacheService.redisTemplate.keys("*");
-        return cacheService.redisTemplate.delete(keys);
+        if (keys!=null && !keys.isEmpty()) {
+            return cacheService.redisTemplate.delete(keys);
+        }
+        return 0L;
     }
 
     public static Long clear(String prefix) {
         Set<String> keys = cacheService.redisTemplate.keys(prefix + "*");
-        return cacheService.redisTemplate.delete(keys);
+        if (keys!=null && !keys.isEmpty()) {
+            return cacheService.redisTemplate.delete(keys);
+        }
+        return 0L;
     }
 
     public static Long getExpireTime(String key) {
@@ -157,28 +112,16 @@ public class CacheService {
     }
 
     public static boolean lock(String key, int timeout) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
         String threadId = String.valueOf(Thread.currentThread().getId());
-        if (cacheService.redisTemplate.hasKey(key)) {
+        if (containKey(key)) {
             if (threadId.equals(cacheService.redisTemplate.opsForValue().get(key))) {
                 return Boolean.TRUE;
             }
         }
-        if (cacheService.redisTemplate.opsForValue().setIfAbsent(key, threadId, timeout, TimeUnit.SECONDS)) {
-            return Boolean.TRUE;
-        }
-        return Boolean.FALSE;
+        return cacheService.redisTemplate.opsForValue().setIfAbsent(key, threadId, timeout, TimeUnit.SECONDS);
     }
 
     public static boolean unlock(String key) {
-        if (StringUtils.isEmpty(key)) {
-            throw new IllegalArgumentException("key cannot be empty.");
-        }
-        if (!cacheService.redisTemplate.hasKey(key) || cacheService.redisTemplate.delete(key)) {
-            return Boolean.TRUE;
-        }
-        return Boolean.FALSE;
+        return !containKey(key) || delete(key);
     }
 }

@@ -9,6 +9,7 @@ import com.scottxuan.web.i18n.I18nUtils;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
 /**
@@ -84,5 +85,12 @@ public class ResultDto<T> implements Serializable {
         if (isPresent()) {
             consumer.accept(data);
         }
+    }
+
+    public T get() {
+        if (data == null) {
+            throw new NoSuchElementException("No value present");
+        }
+        return data;
     }
 }
