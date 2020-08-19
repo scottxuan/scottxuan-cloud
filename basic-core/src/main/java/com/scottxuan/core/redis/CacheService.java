@@ -142,8 +142,13 @@ public class CacheService {
         return cacheService.redisTemplate.keys(key);
     }
 
-    public static Long clear(){
+    public static Long clear() {
         Set<String> keys = cacheService.redisTemplate.keys("*");
+        return cacheService.redisTemplate.delete(keys);
+    }
+
+    public static Long clear(String prefix) {
+        Set<String> keys = cacheService.redisTemplate.keys(prefix + "*");
         return cacheService.redisTemplate.delete(keys);
     }
 
