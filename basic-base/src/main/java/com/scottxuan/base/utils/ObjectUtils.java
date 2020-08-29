@@ -33,6 +33,32 @@ public class ObjectUtils {
         return !isEmpty(obj);
     }
 
+    public static boolean allEmpty(Object... values) {
+        if (values == null) {
+            return true;
+        } else {
+            for (Object value : values) {
+                if (isNotEmpty(value)){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    public static boolean allNotEmpty(Object... values) {
+        if (values == null) {
+            return false;
+        } else {
+            for (Object value : values) {
+                if (isEmpty(value)){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     public static <T> T defaultIfNull(T object, T defaultValue) {
         return object != null ? object : defaultValue;
     }

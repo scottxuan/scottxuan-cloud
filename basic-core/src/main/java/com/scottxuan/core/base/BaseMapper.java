@@ -17,11 +17,24 @@ import java.util.List;
  */
 public interface BaseMapper<T> extends tk.mybatis.mapper.common.BaseMapper<T>, InsertListMapper<T>, InsertUseGeneratedKeysMapper<T>, SelectByIdsMapper<T> {
 
+    /**
+     * 分页查询
+     *
+     * @param t         属性规则 =
+     * @param pageParam
+     * @return
+     */
     default PageResult<T> selectPage(T t, PageParam pageParam) {
         PageQuery.start(pageParam);
         return PageResult.of(select(t));
     }
 
+    /**
+     * 多id查询
+     *
+     * @param ids
+     * @return
+     */
     default List<T> selectByIds(List<?> ids) {
         if (CollectionUtils.isEmpty(ids)) {
             return Lists.newArrayList();

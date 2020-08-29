@@ -1,6 +1,9 @@
 package com.scottxuan.base.uuid;
 
+
+
 /**
+ * @author : scottxuan
  * Twitter_Snowflake<br>
  * SnowFlake的结构如下(每部分用-分开):<br>
  * 0 - 0000000000 0000000000 0000000000 0000000000 0 - 00000 - 00000 - 000000000000 <br>
@@ -136,9 +139,9 @@ public class SnowflakeIdWorker {
         lastTimestamp = timestamp;
 
         //移位并通过或运算拼到一起组成64位的ID
-        return ((timestamp - TWEPOCH) << TIMESTAMP_LEFT_SHIFT) //
-                | (datacenterId << DATA_CENTER_ID_SHIFT) //
-                | (workerId << WORKER_ID_SHIFT) //
+        return ((timestamp - TWEPOCH) << TIMESTAMP_LEFT_SHIFT)
+                | (datacenterId << DATA_CENTER_ID_SHIFT)
+                | (workerId << WORKER_ID_SHIFT)
                 | sequence;
     }
 

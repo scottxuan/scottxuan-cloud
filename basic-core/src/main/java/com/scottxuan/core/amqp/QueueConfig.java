@@ -24,7 +24,7 @@ public class QueueConfig {
      */
     @Bean
     public CustomExchange delayExchange() {
-        Map<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>(2);
         args.put(DELAY_MESSAGE_ARGS_KEY, DELAY_MESSAGE_ARGS_VALUE);
         return new CustomExchange(DELAY_EXCHANGE, DELAY_MESSAGE_TYPE,true, false,args);
     }

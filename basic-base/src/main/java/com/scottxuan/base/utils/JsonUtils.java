@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author : scottxuan
  */
 @Slf4j
-public class JSONUtils {
+public class JsonUtils {
 
     /**
      * Object转JsonString

@@ -24,17 +24,17 @@
 
     <properties>
         <!-- 子包版本管理 -->
-        <basic.base.version>1.0-SNAPSHOT</basic.base.version>
-        <basic.core.version>1.0-SNAPSHOT</basic.core.version>
-        <basic.web.version>1.0-SNAPSHOT</basic.web.version>
+        <basic.base.version>1.0</basic.base.version>
+        <basic.core.version>1.0</basic.core.version>
+        <basic.web.version>1.0</basic.web.version>
         <!-- 编译相关 -->
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- SpringCloud -->
-        <spring.cloud.version>Hoxton.RELEASE</spring.cloud.version>
+        <spring.cloud.version>Hoxton.SR6</spring.cloud.version>
         <!-- LomBack 及 工具类 -->
-        <google.guava.version>28.1-jre</google.guava.version>
+        <google.guava.version>29.0-jre</google.guava.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <lombok.version>1.18.8</lombok.version>
         <!-- MySQL数据库相关 -->
@@ -48,7 +48,8 @@
         <jackson.datatype>2.10.1</jackson.datatype>
         <jackson-databind.varsion>2.9.9.3</jackson-databind.varsion>
         <!-- Swagger -->
-        <swagger2.version>2.8.0</swagger2.version>
+        <swagger2.version>2.9.2</swagger2.version>
+        <knife4j.version>2.0.4</knife4j.version>
     </properties>
 
     <dependencyManagement>
@@ -105,6 +106,11 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid-springboot.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -121,7 +127,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>

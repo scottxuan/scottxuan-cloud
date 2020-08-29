@@ -14,6 +14,9 @@ public class QueryParam {
     private PageParam pageParam;
     private Map<String,Object> params = Maps.newHashMap();
 
+    public QueryParam() {
+    }
+
     public QueryParam(PageParam pageParam) {
         this.pageParam = pageParam;
     }
@@ -40,5 +43,13 @@ public class QueryParam {
             params.put(key,value);
         }
         return this;
+    }
+
+    public Boolean isEmpty(){
+        return params.size() == 0;
+    }
+
+    public Boolean isNotEmpty(){
+        return !isEmpty();
     }
 }
