@@ -46,43 +46,75 @@ public class HttpClient {
         RESPONSE_HANDLER = new BasicResponseHandler();
     }
 
+    public static String execute(String url, String params, ParamType paramType, HttpMethod method) {
+        if (HttpMethod.GET == method) {
+            return get(url, null, null, paramType);
+        }
+        if (HttpMethod.POST == method) {
+            return post(url, params, null, null, paramType);
+        }
+        return "";
+    }
+
+    public static String execute(String url, String params, Map<String, String> headers, Integer timeOut, ParamType paramType, HttpMethod method) {
+        if (HttpMethod.GET == method) {
+            return get(url, headers, timeOut, paramType);
+        }
+        if (HttpMethod.POST == method) {
+            return post(url, params, headers, timeOut, paramType);
+        }
+        return "";
+    }
+
     public static String get(String url) {
-        return get(url, null);
+        return get(url, null, null, ParamType.JSON);
+    }
+
+    public static String get(String url, ParamType paramType) {
+        return get(url, null, null, paramType);
     }
 
     public static String get(String url, Integer timeOut) {
-        return get(url, null, timeOut);
+        return get(url, null, timeOut, ParamType.JSON);
     }
 
-    public static String get(String url, Map<String, String> headers, Integer timeOut) {
+    public static String get(String url, Integer timeOut, ParamType paramType) {
+        return get(url, null, timeOut, paramType);
+    }
+
+    public static String get(String url, Map<String, String> headers, Integer timeOut, ParamType paramType) {
         HttpGet httpGet = new HttpGet(url);
-        config(httpGet, timeOut);
+        config(httpGet, timeOut, paramType);
         configHeader(httpGet, headers);
         return request(httpGet);
     }
 
     public static String post(String url, String params) {
-        return post(url, params, null, null);
+        return post(url, params, null, null, ParamType.JSON);
+    }
+
+    public static String post(String url, String params, ParamType paramType) {
+        return post(url, params, null, null, paramType);
     }
 
     public static String post(String url, String params, Integer timeOut) {
-        return post(url, params, null, timeOut);
+        return post(url, params, null, timeOut, ParamType.JSON);
     }
 
-    public static String post(String url, String params, Map<String, String> headers, Integer timeOut) {
+    public static String post(String url, String params, Integer timeOut, ParamType paramType) {
+        return post(url, params, null, timeOut, paramType);
+    }
+
+    public static String post(String url, String params, Map<String, String> headers, Integer timeOut, ParamType paramType) {
         StringEntity postEntity = new StringEntity(params, CHARSET);
         HttpPost httpPost = new HttpPost(url);
-        config(httpPost, timeOut);
+        config(httpPost, timeOut, paramType);
         configHeader(httpPost, headers);
         httpPost.setEntity(postEntity);
         return request(httpPost);
     }
 
-    private static void config(HttpRequestBase httpRequestBase) {
-        config(httpRequestBase, null);
-    }
-
-    private static void config(HttpRequestBase httpRequestBase, Integer timeOut) {
+    private static void config(HttpRequestBase httpRequestBase, Integer timeOut, ParamType paramType) {
         RequestConfig config = RequestConfig
                 .custom()
                 .setConnectTimeout((timeOut == null || timeOut <= 0) ? DEFAULT_CONNECT_TIMEOUT : timeOut)
@@ -92,7 +124,12 @@ public class HttpClient {
                 .setMaxRedirects(MAX_REDIRECTS)
                 .build();
         httpRequestBase.setConfig(config);
-        httpRequestBase.addHeader("Content-Type", "application/json; charset=utf-8");
+        if (ParamType.JSON == paramType) {
+            httpRequestBase.addHeader("Content-Type", "application/json; charset=utf-8");
+        }
+        if (ParamType.XML == paramType) {
+            httpRequestBase.addHeader("Content-Type", "application/xml; charset=utf-8");
+        }
     }
 
     private static void configHeader(HttpRequestBase httpRequestBase, Map<String, String> headers) {
