@@ -46,7 +46,7 @@
         <!-- json相关 -->
         <jackson.version>2.9.9</jackson.version>
         <jackson.datatype>2.10.1</jackson.datatype>
-        <jackson-databind.varsion>2.9.9.3</jackson-databind.varsion>
+        <jackson-databind.varsion>2.9.10.7</jackson-databind.varsion>
         <!-- Swagger -->
         <swagger2.version>2.9.2</swagger2.version>
         <knife4j.version>2.0.4</knife4j.version>
